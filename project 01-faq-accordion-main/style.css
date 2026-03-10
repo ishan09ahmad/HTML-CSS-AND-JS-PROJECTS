@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Work Sans", sans-serif;
+}
+
+:root {
+  --bg-main: hsl(275, 100%, 97%);
+  --bg-header: hsl(276, 28%, 61%);
+  --bg-card: hsl(0, 0%, 100%);
+  --text-main: hsl(292, 42%, 14%);
+  --text-primary: hsl(292, 16%, 49%);
+}
+
+.dark {
+  --bg-main: hsl(292, 42%, 14%);
+  --bg-header: hsl(276, 28%, 61%);
+  --bg-card: hsl(292, 35%, 18%);
+  --text-main: hsl(0, 0%, 100%);
+  --text-primary: hsl(275, 100%, 97%);
+}
+
+body {
+  background-image: url(./images/background-pattern-desktop.svg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-main);
+  padding: 3rem 1rem;
+}
+
+main {
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--bg-card);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+}
+
+main .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--bg-header);
+  padding: 0.8rem 1rem;
+  border-radius: 0.6rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+main .header .left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+main .header .left img {
+  width: 28px;
+}
+
+main .header .left h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+main .header .right img {
+  width: 28px;
+  cursor: pointer;
+}
+main .header .right img {
+  width: 100%;
+  cursor: pointer;
+}
+
+main .select {
+  background-color: var(--bg-main);
+  padding: 0.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+main .select button {
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+main .select button:hover {
+  background-color: hsl(281, 83%, 54%);
+}
+
+main .accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+main .accordion > div {
+  padding: 0.9rem 0;
+  border-top: 1px solid hsl(275, 20%, 85%);
+}
+
+main .accordion .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+main .accordion .question {
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+main .accordion .question:hover {
+  color: purple;
+}
+
+main .accordion button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+main .accordion button img {
+  width: 22px;
+}
+
+main .accordion .answer {
+  margin-top: 0.7rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.hide {
+  display: none;
+}
+
+.select button.button_color {
+  background-color: red;
+  color: white;
+}
+
+@media (max-width: 500px) {
+  body {
+    background-image: url(./images/background-pattern-mobile.svg);
+  }
+
+  main {
+    max-width: 95%;
+  }
+
+  main .header .left h1 {
+    font-size: 1.6rem;
+  }
+
+  main .accordion .question {
+    font-size: 0.95rem;
+  }
+}
