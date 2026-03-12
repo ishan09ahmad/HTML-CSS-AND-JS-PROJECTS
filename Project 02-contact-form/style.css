@@ -1,0 +1,366 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+:root {
+  --bg-main: hsl(148, 38%, 91%);
+
+  --bg-form: hsl(0, 0%, 100%);
+
+  --text-main: hsl(187, 24%, 22%);
+  --text-muted: hsl(186, 15%, 59%);
+
+  --primary: hsl(169, 82%, 27%);
+  --primary-hover: hsl(169, 82%, 22%);
+  --primary-active: hsl(169, 82%, 20%);
+
+  --error: hsl(0, 66%, 54%);
+  --bg-icon: hsl(147, 30%, 68%);
+
+  --bg-toast: hsl(187, 24%, 22%);
+  --toast-text: hsl(186, 15%, 59%);
+}
+
+.dark {
+  --bg-main: hsl(187, 24%, 10%);
+  --bg-form: hsl(187, 24%, 18%);
+
+ 
+  --text-main: hsl(187, 24%, 22%);
+  --text-muted: hsl(186, 15%, 59%);
+
+  --primary: hsl(169, 82%, 40%);
+  --primary-hover: hsl(169, 82%, 45%);
+  --primary-active: hsl(169, 82%, 35%);
+
+  --error: hsl(0, 66%, 60%);
+  --bg-icon: hsl(148, 49%, 80%);
+
+  --bg-toast: hsl(180, 3%, 30%);
+  --toast-text: hsl(186, 35%, 95%);
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-main);
+  padding: 1rem 1rem;
+}
+
+main {
+  background-color: var(--bg-form);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.header .theme {
+  padding: 2px;
+  background-color: var(--bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: fit-content;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.name input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  color: var(--text-main);
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid var(--text-muted);
+}
+.name input:hover {
+  border: 2px solid var(--primary-hover);
+}
+.name input:focus {
+  border: 2px solid var(--primary-active);
+}
+.name input::placeholder {
+  font-size: 14px;
+}
+.name .fname,
+.name .lname {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.name .fname > span,
+.name .lname > span {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.email input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid var(--text-muted);
+}
+.email input:hover {
+  border: 2px solid var(--primary-hover);
+}
+.email input:focus {
+  border: 2px solid var(--primary-active);
+}
+.email input::placeholder {
+  font-size: 14px;
+}
+
+.email > span {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.query {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.query .query-type {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.query .query-type .general,
+.query .query-type .support {
+  width: 100%;
+  border: 1px solid var(--text-muted);
+  padding: 10px;
+  color: var(--text-muted);
+  border-radius: 5px;
+}
+
+.query span {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.query .query-type .general:has(input:checked),
+.query .query-type .support:has(input:checked) {
+  background-color: var(--bg-icon);
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.message textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid var(--text-muted);
+  resize: none;
+}
+.message textarea:hover {
+  border: 2px solid var(--primary-hover);
+}
+.message textarea:focus {
+  border: 2px solid var(--primary-active);
+}
+
+.message > span {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.consent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+}
+.consent-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  color: var(--text-muted);
+}
+
+.consent > span {
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+button:hover {
+  background-color: var(--primary-hover);
+}
+button:active {
+  background-color: var(--primary-active);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+
+input[type="radio"] {
+  accent-color: var(--primary);
+}
+
+
+.hide {
+  visibility: hidden;
+}
+
+.none {
+  display: none;
+}
+input.border,
+textarea.border {
+  border: 1px solid red;
+}
+input.border:hover,
+textarea.border:hover {
+  border: 2px solid red;
+}
+
+/* toast */
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  padding: 1rem;
+  max-width: 350px;
+  width: 100%;
+  height: 100px;
+
+  background-color: var(--bg-toast);
+  border-radius: 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(100%);
+}
+.animation {
+  opacity: 1;
+  animation: toastAnimation 4s ease forwards;
+}
+.toast .message {
+  color: white;
+  font-weight: 600;
+}
+
+.toast .text {
+  color: var(--toast-text);
+  font-size: 14px;
+}
+
+@keyframes toastAnimation {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  85% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .toast {
+    max-width: 250px;
+  }
+}

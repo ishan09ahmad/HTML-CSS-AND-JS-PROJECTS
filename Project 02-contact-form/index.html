@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="style.css">
+  <script src="./script.js" defer type="module"></script>
+  <title>Contact form</title>
+
+</head>
+
+<body>
+
+  <main>
+
+    <div class="toast" id="toast">
+      <h3 class="message"> Message Sent!
+      </h3>
+      <p class="text">Thanks for completing the form. We'll be in touch soon!</p>
+    </div>
+
+    <section class="header">
+      <h1>Contact Us</h1>
+
+      <div class="theme" id="theme">
+        <img src="./assets/icon-sun.svg" alt="sun-icon" class="none" id="sun">
+        <img src="./assets/icon-moon.svg" class="" alt="moon-icon" id="moon">
+      </div>
+
+    </section>
+
+
+    <form action="#" method="post">
+
+      <div class="name">
+
+        <div class="fname">
+
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First name...">
+
+          <span class="hide" id="fname-error"> This field is required</span>
+
+        </div>
+
+        <div class="lname">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last name...">
+          <span class="hide" id="lname-error"> This field is required</span>
+        </div>
+      </div>
+
+      <div class="email">
+        <label for="email">Email Address *</label>
+        <input type="text" id="email" name="email" placeholder="Email...">
+        <span class="hide" id="email-error"> This field is required</span>
+
+      </div>
+
+      <div class="query">
+        <label for="query-type">Query Type *</label>
+
+
+        <div class="query-type">
+
+
+          <div class="general">
+
+
+            <input type="radio" id="generalEnquiry" name="query" value="general">
+
+            <label for="generalEnquiry">General Enquiry</label>
+
+          </div>
+
+          <div class="support">
+
+            <input type="radio" id="supportRequest" name="query" value="support">
+            <label for="supportRequest">Support Request</label>
+
+
+
+          </div>
+
+
+        </div>
+
+        <span class="hide" id="query-error"> Please select a query type</span>
+
+
+      </div>
+
+      <div class="message">
+        <label for="message">Message *</label>
+
+        <textarea name="message" id="message" rows="4" placeholder="Type your message..."></textarea>
+
+        <span class="hide" id="message-error"> This field is required</span>
+
+      </div>
+
+      <div class="consent">
+        <div class="consent-box">
+          <input type="checkbox" name="consent" id="consent">
+          <label for="consent">I consent to being contacted by the team * </label>
+        </div>
+
+        <span class="hide" id="consent-error"> To submit this form, please consent to being contacted</span>
+
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+
+
+
+
+
+
+</body>
+
+</html>
