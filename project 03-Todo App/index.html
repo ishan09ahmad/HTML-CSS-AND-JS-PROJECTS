@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" defer type="module"></script>
+    <link rel="icon" href="./images/icons8-todo-list-64.png" />
+    <title>Todo app</title>
+  </head>
+
+  <body>
+    <main>
+      <section class="header">
+        <h1>TODO</h1>
+        <div class="theme">
+          <img
+            src="./images/icon-moon.svg"
+            alt="moon-image"
+            class=""
+            id="moon"
+          />
+          <img
+            src="./images/icon-sun.svg"
+            alt="sun-image"
+            class="hide"
+            id="sun"
+          />
+        </div>
+      </section>
+
+      <section class="todoInput">
+        <input
+          type="text"
+          class="input"
+          id="input"
+          placeholder="Create a new todo..."
+        />
+        <button class="add" id="add">Add</button>
+      </section>
+
+      <section class="item-container" id="item-container"></section>
+
+      <div class="remaining">
+        <p class="item-left" id="item-left">0 item left</p>
+        <button class="clear" id="clear">Clear Completed</button>
+      </div>
+
+      <section class="buttons">
+        <button class="all" id="all">All</button>
+        <button class="active" id="active">Active</button>
+        <button class="completed" id="completed">Completed</button>
+      </section>
+    </main>
+  </body>
+</html>

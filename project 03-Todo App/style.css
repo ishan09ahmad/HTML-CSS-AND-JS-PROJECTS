@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+:root {
+  --text-primary: hsl(235, 19%, 35%);
+  --text-secondary: hsl(236, 9%, 61%);
+  --text-completed: hsl(234, 39%, 85%);
+  --hover-color: hsl(236, 33%, 92%);
+  --bg-main: hsl(0, 0%, 98%);
+  --bg-todo: hsl(0, 0%, 100%);
+  --border-color: hsl(233, 11%, 84%);
+  --gradient-start: hsl(192, 100%, 67%);
+  --gradient-end: hsl(280, 87%, 65%);
+  --bg-image-desktop: url(./images/bg-desktop-light.jpg);
+  --bg-image-mobile: url(./images/bg-mobile-light.jpg);
+}
+
+.dark {
+  --text-primary: hsl(234, 39%, 85%);
+  --text-secondary: hsl(236, 9%, 61%);
+  --text-completed: hsl(233, 14%, 35%);
+  --hover-color: hsl(236, 33%, 92%);
+  --active-state: #3a7bfd;
+  --bg-main: hsl(235, 21%, 11%);
+  --bg-todo: hsl(235, 24%, 19%);
+  --border-color: hsl(237, 14%, 26%);
+  --gradient-start: hsl(192, 100%, 67%);
+  --gradient-end: hsl(280, 87%, 65%);
+  --bg-image-desktop: url(./images/bg-desktop-dark.jpg);
+  --bg-image-mobile: url(./images/bg-mobile-dark.jpg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  background-image: var(--bg-image-desktop);
+  background-position: top;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+}
+main {
+  max-width: 500px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.header h1 {
+  color: white;
+}
+.header .theme {
+  width: 25px;
+}
+.header .theme img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.todoInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem;
+  margin-bottom: 1.25rem;
+  background-color: var(--bg-todo);
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 20px black;
+}
+.todoInput .input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--text-primary);
+}
+.todoInput .input::placeholder {
+  color: var(--text-primary);
+}
+.todoInput button.add {
+  background-color: #3a7bfd;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.todoInput button.add:active {
+  transform: scale(0.9);
+}
+
+.item-container {
+  background-color: var(--bg-todo);
+  border-radius: 5px;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 275px;
+  box-shadow: 5px 5px 20px black;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+.item-container .item .left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.item-container .item .left .select .circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+}
+
+.item-container .item .left .select img {
+  width: 20px;
+  background: linear-gradient(var(--gradient-start), var(--gradient-end));
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.item-container .item button.delete {
+  background-color: red;
+  border: none;
+  padding: 0.4rem 0.5rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 5px;
+}
+.item-container .item button.delete:active {
+  transform: scale(0.9);
+}
+
+.remaining {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.75rem;
+  background-color: var(--bg-todo);
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 1.25rem;
+  box-shadow: 5px 5px 20px black;
+  border-radius: 5px;
+}
+.remaining .item-left {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+.remaining button.clear {
+  border: none;
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.remaining button.clear:hover {
+  color: var(--hover-color);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-todo);
+  margin-bottom: 2rem;
+  box-shadow: 5px 5px 20px black;
+  border-radius: 5px;
+}
+.buttons button {
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.textStyle {
+  text-decoration: line-through;
+  color: var(--text-completed);
+}
+button.active-style {
+  color: #3a7bfd;
+}
+
+@media (max-width: 500px) {
+  body {
+    background-image: var(--bg-image-mobile);
+  }
+}
