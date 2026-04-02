@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+main {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #e0f7fa, #b3b6b8);
+}
+.container {
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  min-height: 625px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0px 0px 75px lightcoral;
+  background: linear-gradient(to bottom, #ff66b2, #ff9900);
+}
+.container .search {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4rem;
+  padding: 0.75rem 1.5rem;
+}
+.container .search input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+.container .search:focus-within {
+  outline: 2px solid orangered;
+}
+.container .search img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.container .error {
+  padding-left: 1rem;
+  font-size: 16px;
+  color: red;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.container .weather .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.container .weather .image img {
+  width: min(80%, 225px);
+}
+
+.container .temperature-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: white;
+
+  margin-bottom: 3rem;
+}
+
+.container .temperature-info p {
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.container .last {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0 0.5rem;
+}
+.container .last .humidity,
+.container .last .wind {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 0.75rem;
+  
+}
+.container .last .humidity .image,
+.container .last .wind .image {
+  width: 40px;
+  height: 40px;
+}
+.container .last .humidity .image img,
+.container .last .wind .image img {
+  width: 100%;
+  height: 100%;
+}
+
+.container .last .humidity p,
+.container .last .wind p {
+  font-size: 1rem;
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .container {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
