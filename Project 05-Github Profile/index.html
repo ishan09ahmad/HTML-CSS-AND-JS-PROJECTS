@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Github Profile</title>
+
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="./script.js" type="module" defer></script>
+</head>
+
+<body>
+
+<main>
+
+
+
+
+  <header>
+    <h1>Github Profile</h1>
+
+    <div class="theme-container" id="theme-toggle">
+
+      <div class="light hide theme " id="light">
+        <p>Light</p>
+        <i class="fa-solid fa-sun"></i>
+      </div>
+
+      <div class="dark theme " id="dark">
+        <p>Dark</p>
+        <i class="fa-solid fa-moon"></i>
+      </div>
+
+    </div>
+  </header>
+
+
+  <section class="search-box">
+    <input type="text" placeholder="Search Github Username" id="input" />
+    <button class="search" id="search">Search</button>
+  </section>
+
+  
+  <section class="profile-card hide " id="profile-container">
+
+  
+    <div class="card-top">
+      <div class="card-top-left">
+        <img src="" id="image" />
+      <div class="user-info">
+        <h2 id="name">Ishan Ahmad</h2>
+        <p id="username">@ishan</p>
+      </div>
+      </div>
+      <div class="card-top-right">
+        <i class="fa-solid fa-delete-left" id="delete"></i>
+      </div>
+    </div>
+
+
+    <div class="card-middle">
+
+      <div class="stats">
+        <div class="stat">
+           <span>Repos</span>
+          <p id="repos">100</p>
+         
+        </div>
+        <div class="stat">
+           <span>Followers</span>
+          <p id="followers">1000</p>
+         
+        </div>
+        <div class="stat">
+          <span>Following</span>
+          <p id="followings">200</p>
+          
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div class="card-bottom">
+      <a href="" target="_blank" id="button2">
+        <button class="btn">Check Profile</button>
+      </a>
+    </div>
+
+  </section>
+
+  <div id="loading"></div>
+
+</main>
+
+</body>
+</html>

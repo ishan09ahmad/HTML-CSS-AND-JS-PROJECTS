@@ -44,3 +44,8 @@ A weather application that fetches real-time data.
 
 ---
 
+### 🔹 Project 05 — GitHub Profile Finder
+This project is a responsive web application that allows users to search for any GitHub profile and view key details instantly using the GitHub API.
+
+---
+
