@@ -1,1 +1,21 @@
-PROJECT 04-WEATHER APP/config.ts
+# Node modules 
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Env files
+.env
+
+# Build folders (if added later)
+dist/
+build/
+

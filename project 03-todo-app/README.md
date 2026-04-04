@@ -1,22 +1,44 @@
-# screenshot
-## light theme
-![](./screenshot/Screenshot%202026-03-16%20234211.png)
+# Todo App
+
+A responsive todo application built using HTML, CSS, and TypeScript with task management, filtering, and dark/light theme support.
+
+## Features
+- Add, delete, and mark tasks as completed  
+- Filter tasks (All / Active / Completed)  
+- Clear completed tasks  
+- Persistent data using localStorage  
+- Dark/Light theme toggle  
+- Clean and responsive UI  
+
+## Tech Stack
+- HTML  
+- CSS  
+- TypeScript  
+
+## Preview
+
+### Light Theme
+![screenshot](./screenshot/Screenshot%202026-03-16%20234211.png)
 
 ---
-## dark theme
-![](./screenshot/Screenshot%202026-03-16%20234247.png)
 
----
-## All items
-![](./screenshot/Screenshot%202026-03-16%20234350.png)
-
----
-## active items
-![](./screenshot/Screenshot%202026-03-16%20234418.png)
+### Dark Theme
+![screenshot](./screenshot/Screenshot%202026-03-16%20234247.png)
 
 ---
 
-## completed items
-![](./screenshot/Screenshot%202026-03-16%20234442.png)
+### All Items
+![screenshot](./screenshot/Screenshot%202026-03-16%20234350.png)
 
 ---
+
+### Active Items
+![screenshot](./screenshot/Screenshot%202026-03-16%20234418.png)
+
+---
+
+### Completed Items
+![screenshot](./screenshot/Screenshot%202026-03-16%20234442.png)
+
+<!-- ## Live Demo
+[View Live]() -->
