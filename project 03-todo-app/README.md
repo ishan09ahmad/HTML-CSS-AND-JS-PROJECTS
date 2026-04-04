@@ -41,4 +41,5 @@ A responsive todo application built using HTML, CSS, and TypeScript with task ma
 ![screenshot](./screenshot/Screenshot%202026-03-16%20234442.png)
 
 ## Live Demo
+
 [View Live](https://html-css-and-js-projects-hdyx.vercel.app/)

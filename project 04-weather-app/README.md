@@ -19,4 +19,5 @@ A responsive weather application built using HTML, CSS, and TypeScript that fetc
 ![screenshot](./screenshot/Screenshot%202026-04-01%20185915.png)
 
 ## Live Demo
+
 [View Live](https://html-css-and-js-projects-mzkw.vercel.app/)
