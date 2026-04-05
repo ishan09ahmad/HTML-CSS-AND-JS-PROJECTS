@@ -1,0 +1,131 @@
+:root {
+  --bg: #f4f6f9;
+  --text: #111;
+  --board-bg: #ffffff;
+  --cell-bg: #e4e6eb;
+  --cell-hover: #d4d6db;
+  --x-color: #1976d2;
+  --o-color: #d32f2f;
+  --btn-bg: #1976d2;
+  --btn-text: #ffffff;
+  --shadow: #635f5f;
+}
+
+body.dark {
+  --bg: #1e1e2f;
+  --text: #ffffff;
+  --board-bg: #2c2c3e;
+  --cell-bg: #3a3a55;
+  --cell-hover: #4a4a6a;
+  --x-color: #4fc3f7;
+  --o-color: #ff6b6b;
+  --btn-bg: #4fc3f7;
+  --btn-text: #000;
+  --shadow: #8d8484;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.top-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.theme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 6px 10px;
+}
+.light,
+.dark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+#status {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 8px;
+  background: var(--board-bg);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px var(--shadow);
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background: var(--cell-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.cell:hover {
+  background: var(--cell-hover);
+}
+
+.cell.X {
+  color: var(--x-color);
+}
+
+.cell.O {
+  color: var(--o-color);
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.hide {
+  display: none;
+}
