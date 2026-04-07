@@ -49,3 +49,9 @@ This project is a responsive web application that allows users to search for any
 
 ---
 
+### 🔹 Project 06 — Tic Tac Toe Game
+
+Developed an interactive Tic Tac Toe game with win/draw detection, theme toggle, and responsive UI using JavaScript.
+
+---
+
