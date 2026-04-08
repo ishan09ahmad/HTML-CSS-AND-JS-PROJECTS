@@ -1,0 +1,313 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+header {
+  width: 100%;
+  padding: 1.25rem 1rem 2rem;
+}
+header nav {
+  margin: 0 auto;
+  width: min(500px, 100%);
+  border: 2px solid hsl(217, 16%, 45%);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .logo {
+  width: clamp(100px, 25vw, 140px);
+}
+header nav .logo img {
+  width: 100%;
+}
+header nav .score-card {
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+header nav .score-card p {
+  color: hsl(229, 25%, 31%);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+header nav .score-card span {
+  color: hsl(229, 64%, 46%);
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+main {
+  width: 100%;
+  padding: 1rem 1rem;
+  flex: 1;
+}
+.container {
+  margin: 0 auto;
+  width: min(600px, 100%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+main .container .paper,
+main .container .scissor,
+main .container .rock {
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: inset 0px 7px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: auto;
+  border: clamp(0.75rem, 7vw, 1.25rem) solid black;
+  padding: clamp(0.5rem, 7vw, 2rem);
+}
+
+main .container .paper img,
+main .container .scissor img,
+main .container .rock img {
+  max-width: 50px;
+  width: 100%;
+  min-width: 20px;
+}
+main .container .paper {
+  border-color: hsl(230, 89%, 62%);
+  grid-area: 1/1/2/3;
+}
+main .container .scissor {
+  border-color: hsl(39, 89%, 49%);
+  grid-area: 1/3/2/5;
+}
+
+main .container .rock {
+  border-color: hsl(349, 71%, 52%);
+  grid-area: 2/2/3/4;
+}
+
+main .container .paper:hover,
+main .container .scissor:hover,
+main .container .rock:hover {
+  opacity: 0.85;
+}
+main .container .paper:active,
+main .container .scissor:active,
+main .container .rock:active {
+  transform: scale(0.9);
+}
+
+.game-container {
+  margin: 0 auto;
+  width: min(900px, 100%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+main .game-container .user,
+main .game-container .house {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  grid-column: 1/2;
+}
+
+main .game-container .house {
+  grid-column: 3/4;
+  font-size: 5rem;
+  font-weight: 600;
+  color: white;
+}
+
+main .game-container h1 {
+  font-size: clamp(1rem, 5vw, 2rem);
+  color: white;
+  text-wrap: nowrap;
+}
+
+main .game-container .user .paper,
+main .game-container .house .paper,
+main .game-container .user .rock,
+main .game-container .house .rock,
+main .game-container .user .scissor,
+main .game-container .house .scissor {
+  background-color: white;
+  border-radius: 50%;
+  border: clamp(0.75rem, 7vw, 1.25rem) solid black;
+  padding: clamp(0.5rem, 7vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .game-container .user .paper,
+main .game-container .house .paper {
+  border-color: hsl(230, 89%, 62%);
+}
+main .game-container .user .rock,
+main .game-container .house .rock {
+  border-color: hsl(349, 71%, 52%);
+}
+
+main .game-container .user .scissor,
+main .game-container .house .scissor {
+  border-color: hsl(39, 89%, 49%);
+}
+main .game-container img {
+  max-width: 50px;
+  width: 100%;
+  min-width: 20px;
+}
+
+
+main .game-container .result {
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+main .game-container .result h1 {
+  font-size: 2rem;
+  color: white;
+}
+
+main .game-container .result .playBtn {
+  color: blue;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.rules-container {
+  width: 100%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem 1.5rem;
+  background-color: white;
+  z-index: 10;
+}
+footer .rules-container .top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.cross-btn {
+  font-size: 1.75rem;
+  color: gray;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+footer .rules-container .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer .rules-container .image img {
+  width: 100%;
+  max-width: 350px;
+}
+
+footer .btn {
+  font-size: 1.25rem;
+  border: 2px solid hsl(217, 16%, 45%);
+  color: white;
+  background-color: transparent;
+  padding: 0.35rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+footer .btn:active {
+  transform: scale(0.95);
+}
+
+.hide {
+  display: none;
+}
+
+.circle {
+  box-shadow:
+    inset 0px 7px 5px rgba(0, 0, 0, 0.3),
+    0px 0px 0px 35px rgba(255, 255, 255, 0.05),
+    0px 0px 0px 70px rgba(255, 255, 255, 0.05),
+    0px 0px 0px 105px rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 500px) {
+  footer {
+    justify-content: center;
+  }
+
+  footer .rules-container {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate(0, 0);
+    padding: 2rem 1rem;
+  }
+  main .game-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  main .game-container .user {
+    gap: 1.5rem;
+    grid-column: 1/2;
+  }
+  main .game-container .house {
+    gap: 1.5rem;
+    grid-column: 2/3;
+  }
+  main .game-container .result {
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+
+  .circle {
+    box-shadow:
+      inset 0px 7px 5px rgba(0, 0, 0, 0.3),
+      0px 0px 0px 25px rgba(255, 255, 255, 0.05),
+      0px 0px 0px 50px rgba(255, 255, 255, 0.05),
+      0px 0px 0px 75px rgba(255, 255, 255, 0.05);
+  }
+}
