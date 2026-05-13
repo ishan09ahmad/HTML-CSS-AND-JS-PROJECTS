@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Where in the world?</title>
+    <link rel="stylesheet" href="./output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body class="bg-(--background)">
+    <header class="w-full sticky z-100 top-0 shadow-xl bg-(--element)">
+      <nav
+        class="flex items-center justify-between p-4 min-[500px]:py-6 max-w-350 mx-auto"
+      >
+        <h1
+          class="text-(--primary-text) font-bold text-md min-[500px]:text-2xl"
+        >
+          Where in the world?
+        </h1>
+        <div class="theme cursor-pointer text-(--primary-text)" id="theme">
+          <div class="light hidden font-medium" id="light">
+            <i class="fa-solid fa-sun"></i>
+            Light Mode
+          </div>
+          <div class="dark" id="dark">
+            <i class="fa-solid fa-moon"></i>
+            Dark Mode
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main
+      class="w-full bg-(--background) flex flex-col py-2 min-[500px]:py-6 gap-2 min-[500px]:gap-4"
+    >
+      <section
+        class="flex flex-col min-[500px]:flex-row min-[500px]:items-start min-[500px]:justify-between gap-4 p-4 max-w-350 mx-auto w-full"
+      >
+        <div
+          class="px-6 py-3 bg-(--element) shadow-2xl w-full max-w-80 rounded-md flex items-center gap-6"
+        >
+          <i class="text-(--secondary-text) fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            placeholder="Search for a country..."
+            class="placeholder:text-[14px] outline-none border-none text-(--primary-text)"
+            id="countryInput"
+          />
+        </div>
+
+        <div class="flex flex-col text-(--primary-text) w-full max-w-45">
+          <div
+            class="bg-(--element) flex items-center justify-between rounded-md p-4 shadow-2xl cursor-pointer"
+            id="filter"
+          >
+            <p>Filter by region</p>
+            <div class="angle- transition-transform duration-300" id="angle">
+              <i class="text-(--secondary-text) fa-solid fa-angle-up"></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-(--element) transition-all duration-300 ease-in opacity-0 hidden relative"
+            id="regions"
+          >
+            <ul
+              class="bg-(--element) shadow-2xl rounded-md flex flex-col gap-2 cursor-pointer w-full absolute left-0 right-0 z-10 mt-1"
+              id="regionsList"
+            ></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-4 max-w-350 mx-auto w-full">
+        <div
+          id="countries"
+          class="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-x-12 gap-y-12 justify-items-center min-[500px]:justify-items-normal"
+        ></div>
+      </section>
+    </main>
+
+    <script src="./script.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,576 @@
+const themeEl = document.querySelector<HTMLDivElement>("#theme");
+const lightEl = document.querySelector<HTMLDivElement>("#light");
+const darkEl = document.querySelector<HTMLDivElement>("#dark");
+const filterEl = document.querySelector<HTMLDivElement>("#filter");
+const angle = document.querySelector<HTMLDivElement>("#angle");
+const regionsEl = document.querySelector<HTMLDivElement>("#regions");
+const regionsList = document.querySelector<HTMLDivElement>("#regionsList");
+const countriesEl = document.querySelector<HTMLDivElement>("#countries");
+const countryInputEl =
+  document.querySelector<HTMLInputElement>("#countryInput");
+const backButtonEl = document.querySelector<HTMLButtonElement>("#backButton");
+const countryDetailEl = document.querySelector<HTMLElement>("#countryDetail");
+const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania", "All"];
+
+let countries: CountriesType[] = [];
+const countryCodeMap = new Map<string, string>();
+type CountriesType = {
+  flags: { png: string; alt: string };
+  name: string;
+  capital: string;
+  population: number;
+  region: string;
+  code: string;
+};
+
+let country: CountryDetailsType[] = [];
+
+type CountryDetailsType = {
+  flags: { png: string; alt: string };
+  name: string;
+  nativeName: string;
+  population: number;
+  region: string;
+  subregion: string;
+  capital: string;
+  tld: string;
+  currency: string;
+  languages: string;
+  borders: string[];
+};
+
+filterEl?.addEventListener("click", () => {
+  angle?.classList.toggle("rotate-180");
+  regionsEl?.classList.toggle("opacity-100");
+  regionsEl?.classList.toggle("hidden");
+});
+
+regions.forEach((region) => {
+  const li = document.createElement("li");
+  li.className = "cursor-pointer hover:bg-gray-300 p-2";
+  li.textContent = region;
+  li.addEventListener("click", () => {
+    filterByRegion(region);
+  });
+  regionsList?.appendChild(li);
+});
+
+function filterByRegion(region: string): void {
+  angle?.classList.toggle("rotate-180");
+  regionsEl?.classList.toggle("opacity-0");
+  regionsEl?.classList.add("hidden");
+  if (region === "All") {
+    renderData(countries);
+    return;
+  }
+  let filterCountries = countries.filter(
+    (country) => country.region === region,
+  );
+  renderData(filterCountries);
+}
+
+countryInputEl?.addEventListener("input", () => {
+  let searchValue = countryInputEl.value.trim().toLowerCase();
+  document.querySelector(".loading-card")?.remove();
+
+  if (searchValue === "") {
+    renderData(countries);
+    return;
+  }
+
+  let searchCountry = countries.filter((country) =>
+    country.name.toLowerCase().startsWith(searchValue),
+  );
+
+  if (searchCountry.length === 0) {
+    if (countriesEl) {
+      countriesEl.innerHTML = "";
+      const div = document.createElement("div");
+
+      div.className =
+        "loading-card bg-(--element) mx-auto mt-10 flex h-40 w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-(--primary-text) p-6 text-center shadow-md";
+      div.innerHTML = `  <h2 class="text-xl font-semibold tracking-tight text-(--primary-text)">
+    No Country Found
+  </h2>
+
+  <p class="mt-2 text-sm text-(--secondary-text)">
+    Please try searching for a different country.
+  </p>`;
+      countriesEl.after(div);
+    }
+  }
+
+  renderData(searchCountry);
+});
+
+async function getData(url: string): Promise<void> {
+  try {
+    loadingCountries();
+    let response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Failed to fetch");
+    }
+    let data = await response.json();
+
+    countries = data.map((item: any) => {
+      countryCodeMap.set(item.cca3 || "", item.name?.common || "");
+      return {
+        flags: {
+          png: item.flags?.png || "",
+          alt: item.flags.alt ? item.flags.alt : "",
+        },
+        name: item.name?.common || "",
+        capital: item.capital ? item.capital[0] : "No capital",
+        population: item.population || 0,
+        region: item.region || "Unknown Region",
+        code: item.cca3 || "",
+      };
+    });
+
+    renderData(countries);
+  } catch (error) {
+    errorstateCountries();
+  }
+}
+
+function renderData(countries: CountriesType[]): void {
+  if (countriesEl) {
+    countriesEl.innerHTML = "";
+    countries.forEach((country) => {
+      const card = document.createElement("div");
+      card.className =
+        "bg-(--element) rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition cursor-pointer max-w-80";
+      card.innerHTML = `
+            <img
+              src=${country.flags.png}
+              alt=${country.flags.alt}
+              class="w-full h-45 shadow-2xl"
+            />
+
+            <div class="px-4 py-5">
+              <h2 class="text-2xl font-bold text-(--primary-text) mb-4">
+              ${country.name}
+              </h2>
+
+              <p class="text-(--secondary-text) mb-1.5">
+                <span class="font-semibold text-(--primary-text)"
+                  >Capital:</span
+                >
+                ${country.capital}
+              </p>
+
+              <p class="text-(--secondary-text) mb-1.5">
+                <span class="font-semibold text-(--primary-text)">Region:</span>
+               ${country.region}
+              </p>
+
+              <p class="text-(--secondary-text) mb-5">
+                <span class="font-semibold text-(--primary-text)"
+                  >Population:</span
+                >
+                ${country.population.toLocaleString()}
+              </p>
+          
+          </div>`;
+
+      countriesEl.append(card);
+      card.addEventListener("click", () => {
+        getCountryDetailPage(country.code);
+      });
+    });
+  }
+}
+
+function loadingCountries(): void {
+  if (countriesEl) {
+    countriesEl.innerHTML = "";
+    new Array(12).fill("").forEach(() => {
+      countriesEl.innerHTML += `     <div
+            class="bg-(--element) rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition cursor-pointer max-w-80 h-80"
+          ></div>`;
+    });
+  }
+}
+
+function errorstateCountries(): void {
+  document.querySelector(".error-box1")?.remove();
+
+  if (countriesEl) {
+    countriesEl.innerHTML = "";
+
+    const errorDiv = document.createElement("div");
+
+    errorDiv.className =
+      "error-box1 mx-auto mt-10 flex h-40 w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center shadow-md";
+
+    errorDiv.innerHTML = `
+      <div
+        class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-2xl"
+      >
+        ⚠️
+      </div>
+
+      <h2 class="text-lg font-semibold text-red-700">
+        Something went wrong
+      </h2>
+
+      <p class="mt-1 text-sm text-red-500">
+        Please try again later.
+      </p>
+    `;
+
+    countriesEl.after(errorDiv);
+  }
+}
+
+getData(
+  "https://restcountries.com/v3.1/all?fields=name,flags,region,population,cca3,capital",
+);
+
+function getCountryDetailPage(code: string) {
+  window.location.href = `country-details.html?code=${code}`;
+}
+
+async function getCountryDetails(code: string): Promise<void> {
+  let url = `https://restcountries.com/v3.1/alpha/${code}`;
+  try {
+    loadingCountryDetails();
+    let response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("country not found");
+    }
+    let data = await response.json();
+    const countryData = Array.isArray(data) ? data : [data];
+
+    country = countryData.map((item: any) => ({
+      flags: {
+        png: item.flags?.png ?? "",
+        alt: item.flags?.alt ?? "",
+      },
+
+      name: item.name?.common ?? "",
+
+      nativeName: item.name?.nativeName
+        ? (Object.values(item.name.nativeName)[0] as { common: string })
+            ?.common || ""
+        : "",
+
+      population: item.population || 0,
+
+      region: item.region || "",
+
+      subregion: item.subregion || "",
+
+      capital: item.capital?.[0] || "No Capital",
+
+      tld: item.tld?.[0] || "",
+
+      currency: item.currencies
+        ? (Object.values(item.currencies)[0] as { name: string })?.name || ""
+        : "",
+
+      languages: item.languages
+        ? (Object.values(item.languages)[0] as string) || ""
+        : "",
+
+      borders: item.borders?.slice(0, 3) || [],
+    }));
+
+    renderCountryData(country);
+    console.log(country);
+  } catch (error) {
+    errorStateCountryDetail();
+  }
+}
+
+function renderCountryData(country: CountryDetailsType[]) {
+  if (countryDetailEl) {
+    countryDetailEl.innerHTML = `
+      <div class="w-full max-w-125  mx-auto">
+        <img
+          src="${country[0]?.flags.png}"
+          alt="${country[0]?.flags.alt}"
+          class="w-full rounded-lg shadow-lg   "
+        />
+      </div>
+
+      <div>
+        <h2 class="text-4xl font-bold mb-10 text-(--primary-text)">
+          ${country[0]?.name}
+        </h2>
+
+        <div class="grid sm:grid-cols-2 gap-10">
+          <div class="space-y-4">
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Native Name:
+              </span>
+              ${country[0]?.nativeName}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Population:
+              </span>
+              ${country[0]?.population.toLocaleString()}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Region:
+              </span>
+              ${country[0]?.region}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Sub Region:
+              </span>
+              ${country[0]?.subregion}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Capital:
+              </span>
+              ${country[0]?.capital}
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Top Level Domain:
+              </span>
+              ${country[0]?.tld}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Currency:
+              </span>
+              ${country[0]?.currency}
+            </p>
+
+            <p class="text-(--secondary-text)">
+              <span class="font-semibold text-(--primary-text)">
+                Languages:
+              </span>
+              ${country[0]?.languages}
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-14 flex flex-col sm:flex-row sm:items-center gap-5">
+          <h3
+            class="font-semibold text-lg whitespace-nowrap text-(--primary-text)"
+          >
+            Border Countries:
+          </h3>
+
+          <div class="flex flex-wrap gap-3">
+            ${
+              country[0]?.borders && country[0].borders.length > 0
+                ? country[0].borders
+                    .map(
+                      (border) => `
+                  <button
+                    class="bg-white px-6 py-2 rounded shadow text-(--secondary-text) cursor-pointer border-btn" 
+                    data-code="${border}"
+                  >
+                    ${countryCodeMap.get(border)}
+                  </button>
+                `,
+                    )
+                    .join("")
+                : `<p class="text-(--secondary-text)">
+                    No bordering countries
+                  </p>`
+            }
+          </div>
+        </div>
+      </div>
+    `;
+
+    const borderButtonsEl =
+      document.querySelectorAll<HTMLButtonElement>(".border-btn");
+
+    borderButtonsEl.forEach((button) => {
+      button.addEventListener("click", () => {
+        const code = button.dataset.code;
+        if (code) {
+          getCountryDetailPage(code);
+        }
+      });
+    });
+  }
+}
+
+function loadingCountryDetails(): void {
+  if (countryDetailEl) {
+    countryDetailEl.innerHTML = "";
+    countryDetailEl.innerHTML = `      <div class="w-full max-w-125 mx-auto h-100 rounded-lg shadow-lg">
+   
+        </div>
+
+        <div>
+          <h2 class="text-4xl font-bold mb-10 text-(--primary-text)">
+           
+          </h2>
+
+          <div class="grid sm:grid-cols-2 gap-10">
+            <div class="space-y-4">
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Native Name:</span
+                >
+                
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Population:</span
+                >
+              
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)">Region:</span>
+               
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Sub Region:</span
+                >
+              
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Capital:</span
+                >
+              
+              </p>
+            </div>
+
+           
+            <div class="space-y-4">
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Top Level Domain:</span
+                >
+               
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Currencies:</span
+                >
+               
+              </p>
+
+              <p class="text-(--secondary-text)">
+                <span class="font-semibold text-(--primary-text)"
+                  >Languages:</span
+                >
+              
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-14 flex flex-col sm:flex-row sm:items-center gap-5">
+            <h3
+              class="font-semibold text-lg whitespace-nowrap text-(--primary-text)"
+            >
+              Border Countries:
+            </h3>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="bg-white px-6 py-2 rounded shadow text-(--secondary-text)"
+              >
+                
+              </button>
+
+              <button
+                class="bg-white px-6 py-2 rounded shadow text-(--secondary-text)"
+              >
+                
+              </button>
+
+              <button
+                class="bg-white px-6 py-2 rounded shadow text-(--secondary-text)"
+              >
+                
+              </button>
+            </div>
+          </div>
+        </div>`;
+  }
+}
+
+function errorStateCountryDetail(): void {
+  document.querySelector(".error-box2")?.remove();
+  if (countryDetailEl) {
+    countryDetailEl.innerHTML = "";
+    const errorDiv = document.createElement("div");
+
+    errorDiv.className =
+      "error-box2 mx-auto mt-10 flex h-40 w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center shadow-md";
+
+    errorDiv.innerHTML = `
+  <div
+    class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-2xl"
+  >
+    ⚠️
+  </div>
+
+  <h2 class="text-lg font-semibold text-red-700">
+    Something went wrong
+  </h2>
+
+  <p class="mt-1 text-sm text-red-500">
+    Please try again later.
+  </p>
+`;
+
+    countryDetailEl.after(errorDiv);
+  }
+}
+
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code") || "";
+if (code !== "") {
+  getCountryDetails(code);
+}
+backButtonEl?.addEventListener("click", () => {
+  window.location.href = `index.html`;
+});
+
+themeEl?.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+  const button = target.closest(".dark, .light") as HTMLElement | null;
+
+  if (!button) return;
+
+  let applyDark = button.classList.contains("dark");
+
+  localStorage.setItem("theme", applyDark ? "dark" : "light");
+
+  lightEl?.classList.toggle("hidden", !applyDark);
+  darkEl?.classList.toggle("hidden", applyDark);
+
+  document.body.classList.toggle("dark", applyDark);
+});
+
+function setTheme(): void {
+  let applyDark = localStorage.getItem("theme") === "dark";
+
+  lightEl?.classList.toggle("hidden", !applyDark);
+  darkEl?.classList.toggle("hidden", applyDark);
+
+  document.body.classList.toggle("dark", applyDark);
+}
+
+setTheme();
