@@ -9,8 +9,10 @@ These projects demonstrate my skills in building responsive, interactive, and us
 
 * HTML5
 * CSS3
+* Tailwind CSS
 * JavaScript (ES6+)
 * TypeScript
+* REST APIs
 
 ---
 
@@ -55,3 +57,15 @@ Developed an interactive Tic Tac Toe game with win/draw detection, theme toggle,
 
 ---
 
+
+### 🔹 Project 07 — Rock Paper Scissors Game
+
+A responsive and interactive Rock Paper Scissors game built with TypeScript.  
+**Features:** Real-time score tracking, randomized computer moves, game result display, and responsive UI.
+
+---
+
+### 🔹 Project 08 — Where in the World?
+
+A responsive countries explorer application built using Tailwind CSS and TypeScript.  
+**Features:** Search countries, filter by region, detailed country pages, border country navigation, and dark/light mode support.

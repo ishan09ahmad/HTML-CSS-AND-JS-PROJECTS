@@ -22,7 +22,7 @@ A responsive countries explorer application built using HTML, Tailwind CSS, and 
 
 ## Live Demo
 
-[View Live]()
+[View Live](https://html-css-and-js-projects-pjal.vercel.app/index.html)
 
 ## Preview
 
