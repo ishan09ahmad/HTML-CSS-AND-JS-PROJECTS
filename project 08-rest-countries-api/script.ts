@@ -39,6 +39,27 @@ type CountryDetailsType = {
   borders: string[];
 };
 
+type ApiCountry = {
+  alpha3Code: string;
+  name: string;
+  nativeName: string;
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  topLevelDomain: string[];
+  borders: string[];
+  flags: {
+    png: string;
+  };
+  currencies: {
+    name: string;
+  }[];
+  languages: {
+    name: string;
+  }[];
+};
+
 filterEl?.addEventListener("click", () => {
   angle?.classList.toggle("rotate-180");
   regionsEl?.classList.toggle("opacity-100");
@@ -113,17 +134,17 @@ async function getData(url: string): Promise<void> {
     let data = await response.json();
 
     countries = data.map((item: any) => {
-      countryCodeMap.set(item.cca3 || "", item.name?.common || "");
+      countryCodeMap.set(item.alpha3Code || "", item.name || "");
       return {
         flags: {
           png: item.flags?.png || "",
-          alt: item.flags.alt ? item.flags.alt : "",
+          alt: item.name,
         },
-        name: item.name?.common || "",
-        capital: item.capital ? item.capital[0] : "No capital",
+        name: item.name || "",
+        capital: item.capital || "No Capital",
         population: item.population || 0,
         region: item.region || "Unknown Region",
-        code: item.cca3 || "",
+        code: item.alpha3Code || "",
       };
     });
 
@@ -223,61 +244,64 @@ function errorstateCountries(): void {
   }
 }
 
-getData(
-  "https://restcountries.com/v3.1/all?fields=name,flags,region,population,cca3,capital",
-);
+getData("./data.json");
 
 function getCountryDetailPage(code: string) {
   window.location.href = `country-details.html?code=${code}`;
 }
 
 async function getCountryDetails(code: string): Promise<void> {
-  let url = `https://restcountries.com/v3.1/alpha/${code}`;
+  const url = "./data.json";
+
   try {
     loadingCountryDetails();
-    let response = await fetch(url);
+
+    const response = await fetch(url);
+
     if (!response.ok) {
-      throw new Error("country not found");
+      throw new Error("Country not found");
     }
-    let data = await response.json();
-    const countryData = Array.isArray(data) ? data : [data];
 
-    country = countryData.map((item: any) => ({
-      flags: {
-        png: item.flags?.png ?? "",
-        alt: item.flags?.alt ?? "",
+    const data = (await response.json()) as ApiCountry[];
+
+    const countryData = data.find((country) => country.alpha3Code === code);
+
+    if (!countryData) {
+      throw new Error("Country not found");
+    }
+
+    country = [
+      {
+        flags: {
+          png: countryData.flags?.png ?? "",
+          alt: countryData.name,
+        },
+
+        name: countryData.name,
+
+        nativeName: countryData.nativeName || "",
+
+        population: countryData.population || 0,
+
+        region: countryData.region || "",
+
+        subregion: countryData.subregion || "",
+
+        capital: countryData.capital || "No Capital",
+
+        tld: countryData.topLevelDomain?.[0] || "",
+
+        currency: countryData.currencies?.[0]?.name || "",
+
+        languages: countryData.languages
+          ? countryData.languages.map((lang: any) => lang.name).join(", ")
+          : "",
+
+        borders: countryData.borders?.slice(0, 3) || [],
       },
-
-      name: item.name?.common ?? "",
-
-      nativeName: item.name?.nativeName
-        ? (Object.values(item.name.nativeName)[0] as { common: string })
-            ?.common || ""
-        : "",
-
-      population: item.population || 0,
-
-      region: item.region || "",
-
-      subregion: item.subregion || "",
-
-      capital: item.capital?.[0] || "No Capital",
-
-      tld: item.tld?.[0] || "",
-
-      currency: item.currencies
-        ? (Object.values(item.currencies)[0] as { name: string })?.name || ""
-        : "",
-
-      languages: item.languages
-        ? (Object.values(item.languages)[0] as string) || ""
-        : "",
-
-      borders: item.borders?.slice(0, 3) || [],
-    }));
+    ];
 
     renderCountryData(country);
-    console.log(country);
   } catch (error) {
     errorStateCountryDetail();
   }
